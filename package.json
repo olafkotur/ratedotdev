@@ -1,0 +1,15 @@
+{
+  "name": "ratedotdev",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc ./src/services/github.ts --outDir ./src/out && node ./src/out/services/github.js"
+  },
+  "dependencies": {
+    "https": "^1.0.0",
+    "node-fetch": "^2.6.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.7"
+  }
+}
