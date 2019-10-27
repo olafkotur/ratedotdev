@@ -31,10 +31,10 @@ const GitHubService = {
 
 
 // DANGER: Testing only
-async function main() {
-  const username = 'olafkotur';
-  const repos = await GitHubService.fetchAllRepositories(username);
-  const content = await GitHubService.fetchRepositoryContent(username, repos[0].name);
-  console.log(content);
-}
-main();
+const username = 'olafkotur';
+GitHubService.fetchAllRepositories(username).then((repos: any) => {
+  GitHubService.fetchRepositoryContent(username, repos[0].name).then((content: any) => {
+    console.log(repos[0].name);
+    console.log(content);
+  });
+});
