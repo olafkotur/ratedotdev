@@ -35,14 +35,11 @@ export const LanguageService = {
   },
 
   calcUserLanguageWeight: (reposWeight: ILanguageWeightWithSize[][]) => {
-    console.log("REPOS WEIGHT");
-    console.log(reposWeight);
-
     const weight: ILanguageWeight[] = [];
-    const totalSize: number = 0;
+    let totalSize: number = 0;
     reposWeight.forEach((repo: ILanguageWeightWithSize[]) => {
       repo.forEach((lang: ILanguageWeightWithSize) => {
-        lang.size += totalSize;
+        totalSize += lang.size;
       });
     });
 
@@ -52,9 +49,28 @@ export const LanguageService = {
       });
     });
 
-    console.log("USER WEIGHT");
-    console.log(weight);
+    return weight;
+  },
 
+  filterDuplicateLanguages: (userWeight: ILanguageWeight[]) => {
+    const names = [];
+    userWeight.forEach((w: ILanguageWeight) => {
+      if (!names.includes(w.name)) {
+        names.push(w.name);
+      }
+    });
+
+    const weights = new Array(names.length).fill(0);
+    userWeight.forEach((w: ILanguageWeight) => {
+      if (names.includes(w.name)) {
+        const i = names.indexOf(w.name);
+        weights[i] = weights[i] + w.weight;
+      }
+    });
+
+    const weight: ILanguageWeight[] = names.map((name: string, i: number) => {
+      return { name, weight: weights[i] }
+    });
     return weight;
   },
 }
