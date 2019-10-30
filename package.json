@@ -2,10 +2,14 @@
   "name": "ratedotdev",
   "license": "MIT",
   "scripts": {
-    "build": "tsc ./src/services/github.ts --outDir ./src/out && node ./src/out/services/github.js"
+    "build": "tsc ./src/main.ts --outDir ./out",
+    "start": "node ./out/main.js"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.144",
+    "dotenv": "^8.2.0",
     "https": "^1.0.0",
+    "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
     "request": "^2.88.0"
   },
