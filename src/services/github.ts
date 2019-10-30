@@ -1,10 +1,14 @@
-import { IRepoInfo, IRepoContent } from '../models/github';
+import { IRepoInfo, IRepoContent } from '../models/repo';
 const nodeFetch = require('node-fetch');
+require('dotenv').config()
 
-const GitHubService = {
+const auth: string = `?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`;
+
+export const GitHubService = {
+
   fetchAllRepositories: async (username: string) => {
     const repositories: IRepoInfo[] = [];
-    await nodeFetch(`https://api.github.com/users/${username}/repos`).then(async (res: any) => {
+    await nodeFetch(`https://api.github.com/users/${username}/repos${auth}`).then(async (res: any) => {
       const data: object[] = await res.json();
       data.forEach((d: any) => {
         repositories.push({ name: d.name });
@@ -13,9 +17,9 @@ const GitHubService = {
     return repositories;
   },
 
-  fetchRepositoryContent: async (username: string, repo) => {
+  fetchRepositoryContent: async (username: string, repo: string) => {
     const content: IRepoContent[] = [];
-    await nodeFetch(`https://api.github.com/repos/${username}/${repo}/contents`).then(async (res: any) => {
+    await nodeFetch(`https://api.github.com/repos/${username}/${repo}/contents${auth}`).then(async (res: any) => {
       const data: object[] = await res.json();
       data.forEach((d: any) => {
         content.push({
@@ -28,13 +32,3 @@ const GitHubService = {
     return content;
   }
 }
-
-
-// DANGER: Testing only
-const username = 'olafkotur';
-GitHubService.fetchAllRepositories(username).then((repos: any) => {
-  GitHubService.fetchRepositoryContent(username, repos[0].name).then((content: any) => {
-    console.log(repos[0].name);
-    console.log(content);
-  });
-});
