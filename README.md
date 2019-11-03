@@ -1,4 +1,4 @@
-# Git Stats
+# ratedotdev
 
 ### Ideas
 * Show which languages are used in all projects ranking them
