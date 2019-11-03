@@ -21,8 +21,4 @@ export const languageMap: ILanguageMap[] = [
     extension: '.sh',
     language: 'bash',
   },
-  {
-    extension: '.md',
-    language: 'markdown',
-  },
 ];

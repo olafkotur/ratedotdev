@@ -1,5 +1,5 @@
 {
-  "name": "ratedotdev",
+  "name": "git-stats",
   "license": "MIT",
   "scripts": {
     "build": "tsc ./src/main.ts --outDir ./out",
